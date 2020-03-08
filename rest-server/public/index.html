@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Sign-In Demo</title>
+
+  <!-- importacion de la libreria para la utentificaion de google, y el ID-CLIENT de nuestro proyecto -->
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+  <meta name="google-signin-client_id" content="1017629132763-lq6sippcb7rugmt00msklempo2ogjofg.apps.googleusercontent.com">
+
+</head>
+<body>
+  <!-- peiticion con token, modificar el token -->
+  <!--
+  <img src="http://localhost:3000/image/users/5b9f3a21c26a5c31cac9ff0b-630.jpg?Authorization=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InJvbGUiOiJBRE1JTl9ST0xFIiwic3RhdGUiOnRydWUsImdvb2dsZSI6ZmFsc2UsIl9pZCI6IjViOWYzYTIxYzI2YTVjMzFjYWM5ZmYwYiIsIm5hbWUiOiJUZXN0MSIsImVtYWlsIjoiVGVzdDFAZ21haWwuY29tIiwiX192IjowLCJpbWciOiI1YjlmM2EyMWMyNmE1YzMxY2FjOWZmMGItNjMwLmpwZyJ9LCJpYXQiOjE1Mzc3NDE1OTgsImV4cCI6MTUzNzkxNDM5OH0.cTVRiaLUH1VfOFtCH-3vV5GQNuOtsuAdDtb6j7wGNQ4" alt="">
+  -->
+
+  <!-- Button que logueara con faceboo, y que ejecuta la funcion onSignIn, despues de enviar el formulario -->
+  <div class="g-signin2" data-onsuccess="onSignIn"></div>
+  <!--button para desloguearse -->
+  <a href="#" onclick="signOut();">Sign out</a>
+
+  <script>
+    // callback que se ejecuta cuando nos logueamos
+    function onSignIn(googleUser) {
+      var profile = googleUser.getBasicProfile();
+      console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+      console.log('Name: ' + profile.getName());
+      console.log('Image URL: ' + profile.getImageUrl());
+      console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+      
+      // ajax que sera enviado al server, y que retorna el token
+      var id_token = googleUser.getAuthResponse().id_token
+      console.log(id_token)
+      var xhr = new XMLHttpRequest();
+      xhr.open('POST', '/google');
+      xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+      xhr.onload = function() {
+        console.log('Signed in as: ' + xhr.responseText);
+      };
+      xhr.send('idtoken=' + id_token);
+    }
+
+    // callback que se ejecuta cuando nos deslogueamos
+    function signOut() {
+      var auth2 = gapi.auth2.getAuthInstance();
+      auth2.signOut().then(function () {
+        console.log('User signed out.');
+      });
+    }
+  </script>
+</body>
+</html>
