@@ -105,9 +105,16 @@ app.post('/user', (req, res) => {
   let body = req.body
 
   let user = new User({
+    ci: body.ci,
     name: body.name,
+    lastname: body.lastname,
+    surname: body.surname,
+    address: body.address,
+    cellphone: body.cellphone,
     email: body.email,
+    username: body.username,
     password: bcript.hashSync(body.password, 10),
+    img: body.img,
     role: body.role
   })
   // metodo save para guardar un user en mondoDB

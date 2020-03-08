@@ -10,14 +10,39 @@ let rolesSuccess = {
 }
 
 let userSchema = new Schema({
+  ci: {
+    type: String,
+    unique: true,
+    required: [true, 'El ci es necesario']
+  },
   name: {
     type: String,
     required: [true, 'El nombre es necesario']
   },
+  lastname: {
+    type: String,
+    required: [true, 'El apellido paterno es necesario']
+  },
+  surname: {
+    type: String,
+    required: [false, 'El nombre es necesario']
+  },
+  address: {
+    type: String,
+    required: [false, 'La direccion es necesario']
+  },
+  cellphone: {
+    type: String,
+    required: [false, 'La Celular es necesario']
+  },
   email: {
     type: String,
+    required: [true, 'El correo electronico es necesario']
+  },
+  username: {
+    type: String,
     unique: true,
-    required: [true, 'El correo es necesario']
+    required: [true, 'El username es necesario']
   },
   password: {
     type: String,
@@ -35,10 +60,6 @@ let userSchema = new Schema({
   state: {
     type: Boolean,
     default: true
-  },
-  google: {
-    type: Boolean,
-    default: false
   }
 })
 
