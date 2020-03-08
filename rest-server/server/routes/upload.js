@@ -2,7 +2,6 @@ const express = require('express')
 const fileUpload = require('express-fileupload')
 const app = express()
 const User = require('../models/user')
-const Product = require('../models/product')
 const path = require('path')
 const fs = require('fs')
 
@@ -62,8 +61,6 @@ app.put('/upload/:tipo/:id', (req, res) => {
     }
     if (tipo === 'users') {
       imagenUsuario(id, res, nombreArchivo)
-    } else {
-      imagenProducto(id, res, nombreArchivo)
     }
   })
 })
@@ -95,39 +92,6 @@ let imagenUsuario = (id, res, nombreArhivo) => {
       res.json({
         ok: true,
         user: userDB,
-        img: nombreArhivo
-      })
-    })
-  })
-}
-
-let imagenProducto = (id, res, nombreArhivo) => {
-  Product.findById(id, (err, productDB) => {
-    if (err) {
-      borrarArchivo(nombreArhivo, 'products')
-      res.status(500).json({
-        ok: false,
-        err
-      })
-    }
-
-    if (!productDB) {
-      borrarArchivo(nombreArhivo, 'products')
-      res.status(400).json({
-        ok: false,
-        err: {
-          message: 'El id no es valido'
-        }
-      })
-    }
-
-    borrarArchivo(productDB.img, 'products')
-    productDB.img = nombreArhivo
-
-    productDB.save((errS, userSave) => {
-      res.json({
-        ok: true,
-        user: productDB,
         img: nombreArhivo
       })
     })
