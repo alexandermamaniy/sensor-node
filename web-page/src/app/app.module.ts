@@ -10,12 +10,16 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 
 import { UserModule } from './components/user/user.module';
 import { LoginComponent } from './components/login/login.component';
+import { TemperatureComponent } from './components/sensor/temperature/temperature.component';
+import { HumidityComponent } from './components/sensor/humidity/humidity.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    LoginComponent
+    LoginComponent,
+    TemperatureComponent,
+    HumidityComponent
   ],
   imports: [
     BrowserModule,

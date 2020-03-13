@@ -21,11 +21,11 @@ export class NavbarComponent implements OnInit {
       this.isAuthenticated = true;
       this.user = JSON.parse(atob(localStorage.getItem('Authorization').split('.')[1])).user;
 
-      if(this.user.role == 'ADMIN_ROLE'){
-        this.router.navigate(['/users']);
-      } else {
-        this.router.navigate(['/']);
-      }
+      // if(this.user.role == 'ADMIN_ROLE'){
+      //   this.router.navigate(['/users']);
+      // } else {
+      //   this.router.navigate(['/']);
+      // }
     } else {
       this.isAuthenticated = false;
       this.user = undefined 

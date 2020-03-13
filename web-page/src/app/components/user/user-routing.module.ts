@@ -12,7 +12,6 @@ const routes: Routes = [
     path: 'sample', 
     component: SampleComponent
   },
-  
 ];
 
 @NgModule({

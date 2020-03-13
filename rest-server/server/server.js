@@ -1,5 +1,6 @@
 require('./config/config')
 require('colors')
+require('./mqtt/mqtt-client')
 
 const express = require('express')
 const bodyParser = require('body-parser')
