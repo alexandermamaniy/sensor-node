@@ -3,7 +3,7 @@
     <div class="table-title">
       <div class="row">
         <div class="col-sm-6">
-          <h2>Manage <b>Employees</b></h2>
+          <h2>Tabla  <b>Usuarios</b></h2>
 
         </div>
         <div class="col-sm-6">
@@ -51,14 +51,16 @@
                 data-toggle="tooltip" title="Delete">&#xE872;</i></a>
           </td>
         </tr>
-        <angular-paginator   (pageChange)="currentPage = $event"></angular-paginator>
-      <app-create-user></app-create-user>
+        
+      
       
       <!-- <app-edit-user></app-edit-user>
       <app-delete-user ></app-delete-user> -->
 
       </tbody>
     </table>
+
+    <angular-paginator   (pageChange)="currentPage = $event"></angular-paginator>
     <!-- <div class="clearfix">
       <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
       <ul class="pagination">
@@ -73,6 +75,7 @@
     </div> -->
   </div>
 </div>
+
 
 
 <!-- Delete Modal HTML -->

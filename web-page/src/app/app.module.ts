@@ -14,6 +14,9 @@ import { TemperatureComponent } from './components/sensor/temperature/temperatur
 import { HumidityComponent } from './components/sensor/humidity/humidity.component';
 import { AngularPaginatorModule } from 'angular-paginator';
 
+import * as $ from 'jquery';
+import * as bootstrap from 'bootstrap';
+
 @NgModule({
   declarations: [
     AppComponent,
