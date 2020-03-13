@@ -12,6 +12,7 @@ import { UserModule } from './components/user/user.module';
 import { LoginComponent } from './components/login/login.component';
 import { TemperatureComponent } from './components/sensor/temperature/temperature.component';
 import { HumidityComponent } from './components/sensor/humidity/humidity.component';
+import { AngularPaginatorModule } from 'angular-paginator';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { HumidityComponent } from './components/sensor/humidity/humidity.compone
     AppRoutingModule,
     UserModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AngularPaginatorModule
   ],
   providers: [],
   bootstrap: [AppComponent]

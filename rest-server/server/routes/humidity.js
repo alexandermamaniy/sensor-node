@@ -9,6 +9,7 @@ app.get('/humidity', [verificaToken, verificaAdminRole], (req, res) => {
     
   
     Humidity.find({},'humidity date')
+      .sort({ date: 'desc' })
       .exec((err, humidities) => {
         if (err) {
           return res.status.json({

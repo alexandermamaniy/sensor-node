@@ -9,6 +9,7 @@ app.get('/temperature', [verificaToken, verificaAdminRole], (req, res) => {
     
   
     Temperature.find({},'temp date')
+      .sort({ date: 'desc' })
       //.skip(desde) // desde que regitro a empezar a devolver
       //.limit(limit) // definimos el limite de registros a devolver
       .exec((err, temps) => {

@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ListUsersComponent } from './list-users/list-users.component';
-
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AngularPaginatorModule } from 'angular-paginator';
+
 
 import { UserRoutingModule } from './user-routing.module';
 import { CreateUserComponent } from './create-user/create-user.component';
@@ -14,7 +15,8 @@ import { SampleComponent } from './sample/sample.component';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    UserRoutingModule
+    UserRoutingModule,
+    AngularPaginatorModule
   ]
 })
 export class UserModule { }

@@ -32,7 +32,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let userD of users; index as i" >
+        <tr *ngFor="let userD of users | angularPaginator: { currentPage: currentPage, itemsPerPage: 5 }; let i = index"  >
           <!-- <td>
             <span class="custom-checkbox">
               <input type="checkbox" id="checkbox1" name="options[]" value="1">
@@ -51,7 +51,7 @@
                 data-toggle="tooltip" title="Delete">&#xE872;</i></a>
           </td>
         </tr>
-      
+        <angular-paginator   (pageChange)="currentPage = $event"></angular-paginator>
       <app-create-user></app-create-user>
       
       <!-- <app-edit-user></app-edit-user>
@@ -59,7 +59,7 @@
 
       </tbody>
     </table>
-    <div class="clearfix">
+    <!-- <div class="clearfix">
       <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
       <ul class="pagination">
         <li class="page-item disabled"><a href="#">Previous</a></li>
@@ -70,7 +70,7 @@
         <li class="page-item"><a href="#" class="page-link">5</a></li>
         <li class="page-item"><a href="#" class="page-link">Next</a></li>
       </ul>
-    </div>
+    </div> -->
   </div>
 </div>
 

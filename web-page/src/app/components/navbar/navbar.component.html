@@ -12,8 +12,8 @@
 	<div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">
 		<ul class="nav navbar-nav">
 			<li *ngIf="(isAuthenticated && user.role=='ADMIN_ROLE')" class="nav-item"><a [routerLink]="['/users']" class="nav-link">Usuarios</a></li>
-			<li *ngIf="(isAuthenticated && user.role=='ADMIN_ROLE')" class="nav-item"><a [routerLink]="['/temperature']" >Temperatura</a></li>
-			<li *ngIf="(isAuthenticated && user.role=='ADMIN_ROLE')" class="nav-item"><a [routerLink]="['/humidity']" >Humedad</a></li>
+			<li *ngIf="(isAuthenticated && user.role=='ADMIN_ROLE')" class="nav-item"><a [routerLink]="['/temperature']" class="nav-link" >Temperatura</a></li>
+			<li *ngIf="(isAuthenticated && user.role=='ADMIN_ROLE')" class="nav-item"><a [routerLink]="['/humidity']" class="nav-link" >Humedad</a></li>
 			<li *ngIf="isAuthenticated" class="nav-item"><a href="https://www.google.com/" class="nav-link">Node Red</a></li>
 		</ul>
 

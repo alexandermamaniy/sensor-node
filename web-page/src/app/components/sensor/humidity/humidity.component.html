@@ -18,16 +18,18 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let humidityD of humidities; index as i" >
+          <tr *ngFor="let humidityD of humidities ; let i = index"  >
             <td>{{i+1}}</td>
             <td>{{humidityD.humidity}}</td>
             <td>{{humidityD.date}}</td>
             <td> </td>
           </tr>
-          
+<!--           
+          <angular-paginator   (pageChange)="currentPage = $event"></angular-paginator> -->
+
         </tbody>
       </table>
-      <div class="clearfix">
+      <!-- <div class="clearfix">
         <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
         <ul class="pagination">
           <li class="page-item disabled"><a href="#">Previous</a></li>
@@ -38,7 +40,7 @@
           <li class="page-item"><a href="#" class="page-link">5</a></li>
           <li class="page-item"><a href="#" class="page-link">Next</a></li>
         </ul>
-      </div>
+      </div> -->
     </div>
   </div>
   
