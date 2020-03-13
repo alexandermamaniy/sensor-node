@@ -5,8 +5,19 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 const path = require('path')
-
+var cors = require('cors')
 const app = express()
+
+
+
+// use cors
+app.use(cors({
+  'allowedHeaders': ['sessionId', 'Content-Type','Authorization'],
+  'exposedHeaders': ['sessionId','Authorization'],
+  'origin': '*',
+  'methods': 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  'preflightContinue': false
+}));
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))

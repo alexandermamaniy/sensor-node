@@ -111,9 +111,15 @@ app.post('/user', [verificaToken, verificaAdminRole],(req, res) => {
 
 app.put('/user/:id', [verificaToken, verificaAdminRole], (req, res) => {
   let id = req.params.id
-  let body = _.pick(req.body, ['ci', 'name', 'lastname', 'surname', 'address', 'cellphone', 'email', 'username', 'password', 'img', 'role', 'state'])
+  // let body = _.pick(req.body, ['ci', 'name', 'lastname', 'surname', 'address', 'cellphone', 'email', 'username', 'img', 'role', 'state'])
 
-  if(body.password){
+
+  let password = _.pick(req.body, ['password']).password;
+  let body = null;
+  if(password === null){
+    body = _.pick(req.body, ['ci', 'name', 'lastname', 'surname', 'address', 'cellphone', 'email', 'username', 'img', 'role', 'state'])  
+  } else {
+    body = _.pick(req.body, ['ci', 'name', 'lastname', 'surname', 'address', 'cellphone', 'email', 'username', 'img', 'role', 'state', 'password'])  
     body.password = bcript.hashSync(body.password, 10)
   }
 

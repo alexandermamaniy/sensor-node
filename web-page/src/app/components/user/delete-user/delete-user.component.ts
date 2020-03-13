@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-delete-user',
@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DeleteUserComponent implements OnInit {
 
-  constructor() { }
+  @Input() public userId: any;
+
+
+  constructor() {
+    console.log('hola', this.userId);
+  }
 
   ngOnInit() {
+    
   }
 
 }

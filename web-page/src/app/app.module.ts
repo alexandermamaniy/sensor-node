@@ -4,6 +4,8 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 import { NavbarComponent } from './components/navbar/navbar.component';
 
 import { UserModule } from './components/user/user.module';
@@ -19,7 +21,9 @@ import { LoginComponent } from './components/login/login.component';
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    UserModule
+    UserModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
