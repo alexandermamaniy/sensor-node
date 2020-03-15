@@ -12,9 +12,9 @@
 	<div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">
 		<ul class="nav navbar-nav">
 			<li *ngIf="(isAuthenticated && user.role=='ADMIN_ROLE')" class="nav-item"><a [routerLink]="['/users']" class="nav-link">Usuarios</a></li>
-			<li *ngIf="(isAuthenticated && user.role=='ADMIN_ROLE')" class="nav-item"><a [routerLink]="['/temperature']" class="nav-link" >Temperatura</a></li>
-			<li *ngIf="(isAuthenticated && user.role=='ADMIN_ROLE')" class="nav-item"><a [routerLink]="['/humidity']" class="nav-link" >Humedad</a></li>
-			<li *ngIf="isAuthenticated" class="nav-item"><a href="https://www.google.com/" class="nav-link">Node Red</a></li>
+			<li *ngIf="(isAuthenticated && user.role=='ADMIN_ROLE')" class="nav-item"><a [routerLink]="['/temp']" class="nav-link" >Temperatura</a></li>
+			<li *ngIf="(isAuthenticated && user.role=='ADMIN_ROLE')" class="nav-item"><a [routerLink]="['/hum']" class="nav-link" >Humedad</a></li>
+			<li *ngIf="isAuthenticated" class="nav-item"><a href="http://localhost:1880/ui/#/0/" class="nav-link">Node Red</a></li>
 		</ul>
 
 		<ul *ngIf="!isAuthenticated" class="nav navbar-nav navbar-right ml-auto">			

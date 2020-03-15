@@ -18,7 +18,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let tempD of temps ; let i = index"  >
+          <tr *ngFor="let tempD of temps | angularPaginator: { currentPage: currentPage, itemsPerPage: 5 }; let i = index"  >
             <td>{{i+1}}</td>
             <td>{{tempD.temp}}</td>
             <td>{{tempD.date}}</td>
@@ -29,6 +29,9 @@
           
         </tbody>
       </table>
+
+      <angular-paginator   (pageChange)="currentPage = $event"></angular-paginator>
+
       <!-- <div class="clearfix">
         <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
         <ul class="pagination">

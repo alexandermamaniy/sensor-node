@@ -6,11 +6,11 @@ import { HumidityComponent } from './components/sensor/humidity/humidity.compone
 
 const routes: Routes = [
   { 
-    path: 'temperature', 
+    path: 'temp', 
     component: TemperatureComponent
   },
   { 
-    path: 'humidity', 
+    path: 'hum', 
     component: HumidityComponent
   },
 ];
