@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
+import {environment} from 'src/environments/environment';
 
 @Component({
   selector: 'app-navbar',
@@ -11,10 +12,13 @@ export class NavbarComponent implements OnInit {
 
   user: any;
   isAuthenticated: boolean;
+  urlPageNodeRed:  string;
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router) { }
+    private router: Router) { 
+      this.urlPageNodeRed = environment.urlPageNodeRed;
+    }
 
   ngOnInit() {
     if(localStorage.getItem('Authorization')){

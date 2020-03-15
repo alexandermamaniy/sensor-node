@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   serverUrl: "http://localhost:3000",
+  urlPageNodeRed: "http://google.com",
   SEED: 'este-es-el-seed-desarrollo'
 };
 

@@ -32,16 +32,18 @@ let create_user = () => {
     });
 }
 
-mongoose.connect(process.env.URLDB, (err, resp) => {
-    if (err) {
-      throw err
-    } else {
 
-    create_user()
+mongoose.connect(process.env.URLDB, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true})
+    .then(() => {
+        create_user()
         .then((username) => console.log(`Se creo correctamente el usuario: ${username}`.green))
         .catch(() => console.log("Error al crear el usuario".red))
-    }
-  })
+    })
+    .catch((error) => {
+      console.log(error.red)
+    })
 
 
 

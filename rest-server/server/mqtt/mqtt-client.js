@@ -1,5 +1,6 @@
 var mqtt = require('mqtt')
-var client  = mqtt.connect('mqtt:localhost')
+require('../config/config')
+var client  = mqtt.connect(process.env.SERVER_MQTT)
 const Temperature = require('../models/temperature') 
 const Humidity = require('../models/humidity') 
 

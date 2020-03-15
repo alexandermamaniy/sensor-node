@@ -33,11 +33,14 @@ app.use(require('./routes/index'))
 
 app.use(express.static(path.resolve(__dirname, '../public')))
 
-mongoose.connect(process.env.URLDB, (err, resp) => {
-  if (err) {
-    throw err
-  }
-  console.log('Mongo corriendo de forma correcta'.green)
-})
+mongoose.connect(process.env.URLDB, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true})
+  .then(() => {
+    console.log('Mongo corriendo de forma correcta'.green)
+  })
+  .catch((error) => {
+    console.log(error.red)
+  })
 
 app.listen(process.env.PORT, () => console.log(`escuchando por el puerto ${process.env.PORT}`))
