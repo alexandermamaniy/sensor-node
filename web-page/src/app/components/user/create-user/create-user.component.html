@@ -1,0 +1,65 @@
+<!-- Add Modal HTML -->
+<div id="addEmployeeModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form [formGroup]="userForm" (ngSubmit)="createUser(userForm.value)" >
+                <div class="modal-header">
+                    <h4 class="modal-title">Agregar Usuario</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <label>C.I.</label>
+                        <input type="text" class="form-control" formControlName="ci" id="ci"  required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Nombre</label>
+                        <input type="text" class="form-control" formControlName="name" id="name"  required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Apellido Paterno</label>
+                        <input type="text" class="form-control" formControlName="lastname" id="lastname"  required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Apellido Materno</label>
+                        <input type="text" class="form-control" formControlName="surname" id="surname"  required>
+                    </div>
+
+
+
+                    <div class="form-group">
+                        <label>correo</label>
+                        <input type="email" class="form-control" formControlName="email" id="email"  required>
+                    </div>
+                    <div class="form-group">
+                        <label>direccion</label>
+                        <textarea class="form-control" formControlName="address" id="address"  required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>telefono</label>
+                        <input type="tel" class="form-control" formControlName="cellphone" id="cellphone"  required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Nombre De Usuario</label>
+                        <input type="text" class="form-control" formControlName="username" id="username"  required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Contraseña</label>
+                        <input type="password" class="form-control" formControlName="password" id="password"  required>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
+                    <input type="submit" class="btn btn-success" value="Agregar">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,169 @@
+<div *ngIf="(isAuthenticated && user.role=='ADMIN_ROLE')"  class="container">
+  <div class="table-wrapper">
+    <div class="table-title">
+      <div class="row">
+        <div class="col-sm-6">
+          <h2>Tabla  <b>Usuarios</b></h2>
+
+        </div>
+        <div class="col-sm-6">
+          <a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i>
+            <span>Agregar Usuario</span></a>
+          <!-- <a href="#deleteEmployeeModal" class="btn btn-danger" data-toggle="modal"><i
+              class="material-icons">&#xE15C;</i> <span>Delete</span></a> -->
+        </div>
+      </div>
+    </div>
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <!-- <th>
+            <span class="custom-checkbox">
+              <input type="checkbox" id="selectAll">
+              <label for="selectAll"></label>
+            </span>
+          </th> -->
+          <th>#</th>
+          <th>Nombre</th>
+          <th>correo</th>
+          <th>Direccion</th>
+          <th>Celular</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let userD of users | angularPaginator: { currentPage: currentPage, itemsPerPage: 5 }; let i = index"  >
+          <!-- <td>
+            <span class="custom-checkbox">
+              <input type="checkbox" id="checkbox1" name="options[]" value="1">
+              <label for="checkbox1"></label>
+            </span>
+          </td> -->
+          <td>{{i+1}}</td>
+          <td>{{userD.name}}</td>
+          <td>{{userD.email}}</td>
+          <td>{{userD.address}}</td>
+          <td>{{userD.cellphone}}</td>
+          <td>
+            <a href="#editEmployeeModal" class="edit" (click)="updateUser(userD._id)" data-toggle="modal"><i class="material-icons"
+                data-toggle="tooltip"  title="Edit">&#xE254;</i></a>
+            <a href="#deleteEmployeeModal" class="delete" (click)="deleteUser(userD._id)" data-toggle="modal"><i class="material-icons"
+                data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+          </td>
+        </tr>
+        
+      <app-create-user></app-create-user>
+      
+      <!-- <app-edit-user></app-edit-user>
+      <app-delete-user ></app-delete-user> -->
+
+      </tbody>
+    </table>
+
+    <angular-paginator   (pageChange)="currentPage = $event"></angular-paginator>
+    <!-- <div class="clearfix">
+      <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
+      <ul class="pagination">
+        <li class="page-item disabled"><a href="#">Previous</a></li>
+        <li class="page-item"><a href="#" class="page-link">1</a></li>
+        <li class="page-item"><a href="#" class="page-link">2</a></li>
+        <li class="page-item active"><a href="#" class="page-link">3</a></li>
+        <li class="page-item"><a href="#" class="page-link">4</a></li>
+        <li class="page-item"><a href="#" class="page-link">5</a></li>
+        <li class="page-item"><a href="#" class="page-link">Next</a></li>
+      </ul>
+    </div> -->
+  </div>
+</div>
+
+
+
+<!-- Delete Modal HTML -->
+<div id="deleteEmployeeModal" class="modal fade">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <form>
+              <div class="modal-header">
+                  <h4 class="modal-title">Eliminar Usuario</h4>
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              </div>
+              <div class="modal-body">
+                  <p>¿Estas Seguro de eliminar este usuario?</p>
+                  <p class="text-warning"><small>.</small></p>
+              </div>
+              <div class="modal-footer">
+                  <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
+                  <input type="submit" (click)="deleteUserButton()" class="btn btn-danger" value="Eliminar">
+              </div>
+          </form>
+      </div>
+  </div>
+</div>
+
+
+
+<!-- Edit Modal HTML -->
+<div id="editEmployeeModal" class="modal fade">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <form [formGroup]="userForm" (ngSubmit)="updateUserButton(userForm.value)" >
+              <div class="modal-header">
+                  <h4 class="modal-title">Editar Usuario</h4>
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              </div>
+              <div class="modal-body">
+
+                  <div class="form-group">
+                      <label>C.I.</label>
+                      <input type="text" class="form-control" formControlName="ci" id="ci"  required>
+                  </div>
+
+                  <div class="form-group">
+                      <label>Nombre</label>
+                      <input type="text" class="form-control" formControlName="name" id="name"  required>
+                  </div>
+
+                  <div class="form-group">
+                      <label>Apellido Paterno</label>
+                      <input type="text" class="form-control" formControlName="lastname" id="lastname"  required>
+                  </div>
+
+                  <div class="form-group">
+                      <label>Apellido Materno</label>
+                      <input type="text" class="form-control" formControlName="surname" id="surname"  required>
+                  </div>
+
+
+
+                  <div class="form-group">
+                      <label>correo</label>
+                      <input type="email" class="form-control" formControlName="email" id="email"  required>
+                  </div>
+                  <div class="form-group">
+                      <label>direccion</label>
+                      <textarea class="form-control" formControlName="address" id="address"  required></textarea>
+                  </div>
+                  <div class="form-group">
+                      <label>telefono</label>
+                      <input type="tel" class="form-control" formControlName="cellphone" id="cellphone"  required>
+                  </div>
+
+                  <div class="form-group">
+                      <label>Nombre De Usuario</label>
+                      <input type="text" class="form-control" formControlName="username" id="username"  required>
+                  </div>
+
+                  <div class="form-group">
+                      <label>Contraseña</label>
+                      <input type="password" class="form-control" formControlName="password" id="password"  required>
+                  </div>
+
+              </div>
+              <div class="modal-footer">
+                  <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
+                  <input type="submit" class="btn btn-success" value="Actualizar">
+              </div>
+          </form>
+      </div>
+  </div>
+</div>
