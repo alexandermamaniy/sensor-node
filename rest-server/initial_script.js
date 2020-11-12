@@ -24,7 +24,7 @@ let create_user = () => {
     
         user.save((err, userDB) => {
             if (err) {
-                reject()
+                reject(err)
             } else {
                 resolve(userDB.username)
             }
@@ -38,8 +38,12 @@ mongoose.connect(process.env.URLDB, {
     useUnifiedTopology: true})
     .then(() => {
         create_user()
-        .then((username) => console.log(`Se creo correctamente el usuario: ${username}`.green))
-        .catch(() => console.log("Error al crear el usuario".red))
+        .then((username) => {
+
+            console.log(`Se creo correctamente el usuario: ${username}`.green)
+            process.exit()
+        })
+        .catch((err) => console.log("Error al crear el usuario".red, err))
     })
     .catch((error) => {
       console.log(error.red)
