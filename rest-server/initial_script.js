@@ -34,8 +34,11 @@ let create_user = () => {
 
 
 mongoose.connect(process.env.URLDB, {
+    useCreateIndex: true,
+    useFindAndModify: false,
     useNewUrlParser: true,
-    useUnifiedTopology: true})
+    useUnifiedTopology: true,
+    retryWrites:false})
     .then(() => {
         create_user()
         .then((username) => {

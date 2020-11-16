@@ -9,6 +9,24 @@ const path = require('path')
 var cors = require('cors')
 const app = express()
 
+jasper = require('node-jasper')({
+  path:'lib/jasperreports-6.2.0',
+  reports: {
+    hw: {
+      jasper: 'reports/hello_world.jasper'}
+    }});
+
+app.get('/report', function(req, res, next) {
+  let report = {
+     report: 'hw',
+     data: {
+       name: 'Lili' }};
+  let pdf = jasper.pdf(report);
+  res.set({
+     'Content-type': 'application/pdf',
+     'Content-Length': pdf.length});
+  res.send(pdf);
+});
 
 
 // use cors
@@ -34,8 +52,11 @@ app.use(require('./routes/index'))
 app.use(express.static(path.resolve(__dirname, '../public')))
 
 mongoose.connect(process.env.URLDB, {
+  useCreateIndex: true,
+  useFindAndModify: false,
   useNewUrlParser: true,
-  useUnifiedTopology: true})
+  useUnifiedTopology: true,
+  retryWrites:false})
   .then(() => {
     console.log('Mongo corriendo de forma correcta'.green)
   })

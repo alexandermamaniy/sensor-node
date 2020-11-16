@@ -12,8 +12,10 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'dev'
 // ======================
 // Base de DATOS
 // ======================
-// process.env.URLDB = (process.env.NODE_ENV === 'dev') ? 'mongodb://alex:pepito1234@ds263107.mlab.com:63107/sensor-node' : process.env.MONGO_URI
-process.env.URLDB = (process.env.NODE_ENV === 'dev') ? 'mongodb://localhost/sensor-node' : process.env.MONGO_URI
+process.env.URLDB = (process.env.NODE_ENV === 'dev') ? "mongodb://alex:pepito1234@ds139037.mlab.com:39037/temperatura" : process.env.MONGO_URI
+// process.env.URLDB = (process.env.NODE_ENV === 'dev') ? 'mongodb:\/\/localhost:27017/sensor-node' : process.env.MONGO_URI
+
+
 
 // ======================
 // Vencimiento del token
