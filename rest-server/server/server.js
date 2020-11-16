@@ -20,7 +20,8 @@ app.get('/report', function(req, res, next) {
   let report = {
      report: 'hw',
      data: {
-       name: 'Lili' }};
+       name: 'Lili',
+       path_image_logo: '/home/pi/Desktop/sensor-node/rest-server/server/reports/logo.png' }};
   let pdf = jasper.pdf(report);
   res.set({
      'Content-type': 'application/pdf',
