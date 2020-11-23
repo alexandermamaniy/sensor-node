@@ -17,11 +17,12 @@ jasper = require('node-jasper')({
     }});
 
 app.get('/report', function(req, res, next) {
+  console.log(__dirname)
   let report = {
      report: 'hw',
      data: {
        name: 'Lili',
-       path_image_logo: '/home/pi/Desktop/sensor-node/rest-server/server/reports/logo.png' }};
+       path_image_logo: `${__dirname}/reports/logo.png` }};
   let pdf = jasper.pdf(report);
   res.set({
      'Content-type': 'application/pdf',

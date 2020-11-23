@@ -25,12 +25,13 @@ client.on('message', function (topic, message) {
   if(topic == 'temp'){
 
     let f = new Date();
-    let dateNow =  `${f.getDate()}/${f.getMonth() +1}/${f.getFullYear()} ${f.getHours()}:${f.getMinutes()}:${f.getSeconds()}`;
-
+    let dateNow =  `${f.getDate()}/${f.getMonth() +1}/${f.getFullYear()}`;
+    let hourNow =  `${f.getHours()}:${f.getMinutes()}:${f.getSeconds()}`;
 
     let temp = new Temperature({
         temp: message,
-        date: dateNow
+        date: dateNow,
+        hour: hourNow
       })
       // metodo save para guardar un user en mondoDB
       temp.save((err, tempDB) => {
@@ -45,11 +46,12 @@ client.on('message', function (topic, message) {
   if( topic == 'humidity'){
 
     let f = new Date();
-    let dateNow =  `${f.getDate()}/${f.getMonth() +1}/${f.getFullYear()} ${f.getHours()}:${f.getMinutes()}:${f.getSeconds()}`;
-
+    let dateNow =  `${f.getDate()}/${f.getMonth() +1}/${f.getFullYear()}`;
+    let hourNow =  `${f.getHours()}:${f.getMinutes()}:${f.getSeconds()}`;
     let humi = new Humidity({
         humidity: message,
-        date: dateNow
+        date: dateNow,
+        hour: hourNow
       })
       // metodo save para guardar un user en mondoDB
       humi.save((err, humiDB) => {
