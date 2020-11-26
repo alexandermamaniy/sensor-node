@@ -9,20 +9,17 @@ const bcript = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
 // importamos modelo USer de mongo
-const User = require('../models/user')
+// const User = require('../models/user')
+const {queryMysql} = require('../utils/connectionMysql')
+
 
 app.post('/login', (req, res) => {
   let body = req.body
 
-  User.findOne({username: body.username}, (err, userDB) => {
-    if (err) {
-      return res.status(500).json({
-        ok: false,
-        err
-      })
-    }
+  queryMysql(`select  username, state, role, password from user_a where state=true and username='${body.username}' limit 1`)
+  .then( data => {
 
-    if (!userDB) {
+    if (!data) {
       return res.status(400).json({
         ok: false,
         err: {
@@ -30,8 +27,9 @@ app.post('/login', (req, res) => {
         }
       })
     }
+
     // contraseña normar, contraseña ecriptada
-    if (!bcript.compareSync(body.password, userDB.password)) {
+    if (!bcript.compareSync(body.password, data[0].password)) {
       return res.status(400).json({
         ok: false,
         err: {
@@ -41,15 +39,21 @@ app.post('/login', (req, res) => {
     }
 
     let token = jwt.sign({
-      user: userDB
+      user: data[0]
     }, process.env.SEED, {expiresIn: process.env.CADUCIDAD_TOKEN})
 
     res.json({
       ok: true,
-      user: userDB,
+      user: data,
       token
     })
   })
+  .catch(error => {
+    return res.status(500).json({
+      ok: false,
+      err: error
+    })
+  }) 
 })
 
 module.exports = app

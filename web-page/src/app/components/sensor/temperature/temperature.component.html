@@ -21,7 +21,7 @@
           <tr *ngFor="let tempD of temps | angularPaginator: { currentPage: currentPage, itemsPerPage: 5 }; let i = index"  >
             <td>{{i+1}}</td>
             <td>{{tempD.temp}}</td>
-            <td>{{tempD.date}}</td>
+            <td>{{tempD.date.split('T')[0]+"   "+tempD.hour}}</td>
             <td> </td>
           </tr>
 <!-- 

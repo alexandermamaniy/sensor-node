@@ -26,6 +26,7 @@
     "mongoose": "^5.2.12",
     "mongoose-unique-validator": "^2.0.1",
     "mqtt": "^3.0.0",
+    "mysql": "^2.18.1",
     "node-jasper": "^0.2.5",
     "underscore": "^1.9.1"
   },

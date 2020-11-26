@@ -4,24 +4,25 @@ require('./mqtt/mqtt-client')
 
 const express = require('express')
 const bodyParser = require('body-parser')
-const mongoose = require('mongoose')
 const path = require('path')
 var cors = require('cors')
-const app = express()
+const app = express() 
 
 jasper = require('node-jasper')({
   path:'lib/jasperreports-6.2.0',
   reports: {
     hw: {
-      jasper: 'reports/hello_world.jasper'}
+      jasper: 'reports/sensornode_reporte.jasper'}
     }});
+    //19-09-20 08:14:17 AM
 
-app.get('/report', function(req, res, next) {
+app.get('/report', function(req, res) {
   console.log(__dirname)
   let report = {
      report: 'hw',
      data: {
-       name: 'Lili',
+       date_report_init: '2020-09-19 00:00:00',
+       date_report_end:  '2020-09-27 00:00:00',     
        path_image_logo: `${__dirname}/reports/logo.png` }};
   let pdf = jasper.pdf(report);
   res.set({
@@ -53,17 +54,17 @@ app.use(require('./routes/index'))
 
 app.use(express.static(path.resolve(__dirname, '../public')))
 
-mongoose.connect(process.env.URLDB, {
-  useCreateIndex: true,
-  useFindAndModify: false,
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  retryWrites:false})
-  .then(() => {
-    console.log('Mongo corriendo de forma correcta'.green)
-  })
-  .catch((error) => {
-    console.log(error.red)
-  })
+// mongoose.connect(process.env.URLDB, {
+//   useCreateIndex: true,
+//   useFindAndModify: false,
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true,
+//   retryWrites:false})
+//   .then(() => {
+//     console.log('Mongo corriendo de forma correcta'.green)
+//   })
+//   .catch((error) => {
+//     console.log(error.red)
+//   })
 
 app.listen(process.env.PORT, () => console.log(`escuchando por el puerto ${process.env.PORT}`))

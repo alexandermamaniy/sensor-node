@@ -14,15 +14,15 @@
             <th>#</th>
             <th >Humedad</th>
             <th>Fecha</th>
-            <th> </th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let humidityD of humidities  | angularPaginator: { currentPage: currentPage, itemsPerPage: 5 } ; let i = index"  >
             <td>{{i+1}}</td>
             <td>{{humidityD.humidity}}</td>
-            <td>{{humidityD.date}}</td>
-            <td> </td>
+            <td>{{humidityD.date.split('T')[0]+"  "+humidityD.hour}}</td>
+            <td></td>
           </tr>
 <!--           
           <angular-paginator   (pageChange)="currentPage = $event"></angular-paginator> -->

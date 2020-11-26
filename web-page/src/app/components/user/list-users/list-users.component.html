@@ -45,9 +45,9 @@
           <td>{{userD.address}}</td>
           <td>{{userD.cellphone}}</td>
           <td>
-            <a href="#editEmployeeModal" class="edit" (click)="updateUser(userD._id)" data-toggle="modal"><i class="material-icons"
+            <a href="#editEmployeeModal" class="edit" (click)="updateUser(userD.id)" data-toggle="modal"><i class="material-icons"
                 data-toggle="tooltip"  title="Edit">&#xE254;</i></a>
-            <a href="#deleteEmployeeModal" class="delete" (click)="deleteUser(userD._id)" data-toggle="modal"><i class="material-icons"
+            <a href="#deleteEmployeeModal" class="delete" (click)="deleteUser(userD.id)" data-toggle="modal"><i class="material-icons"
                 data-toggle="tooltip" title="Delete">&#xE872;</i></a>
           </td>
         </tr>

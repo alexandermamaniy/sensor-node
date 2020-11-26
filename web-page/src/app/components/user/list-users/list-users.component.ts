@@ -46,7 +46,7 @@ export class ListUsersComponent implements OnInit {
       this.userService.getAll()
         .subscribe((resp) => {
           this.users = resp['users'];
-          console.log(this.users)
+          console.log('estos son los usuario : ',this.users)
         }, (error) => {
           console.log(error);
         });
@@ -60,8 +60,8 @@ export class ListUsersComponent implements OnInit {
 
     this.userIdUpdate = id;
 
-    let userEncontrado = this.users.filter(user => user._id==id)[0];
-
+    let userEncontrado = this.users.filter(user => user.id==id)[0];
+    console.log(userEncontrado)
     this.userForm = this.formBuilder.group({
       ci: userEncontrado.ci,
       name: userEncontrado.name,
@@ -88,10 +88,12 @@ export class ListUsersComponent implements OnInit {
   }
 
   deleteUser(id) {
+    console.log(id)
     this.userIdDelete = id;
   }
 
   deleteUserButton(){
+    // console.log(this.userIdDelete)
     this.userService.delete(this.userIdDelete)
       .subscribe(resp => {
         $('#deleteEmployeeModal').modal('hide');
