@@ -23,9 +23,11 @@ export class TemperatureComponent implements OnInit {
    
       this.temperatureService.getAll()
         .subscribe(resp => {
+          console.log( 'regreps' +  resp['temps']);
           this.temps = resp['temps']
         }, err => {
-
+          console.log(  err);
+          
         })
 
     } else {

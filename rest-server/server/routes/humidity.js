@@ -6,7 +6,7 @@ const {queryMysql} = require('../utils/connectionMysql')
 // importamos modelo USer de mongo
 const Humidity = require('../models/humidity')
 
-app.get('/humidity', (req, res) => {
+app.get('/humidity',  [verificaToken, verificaAdminRole], (req, res) => {
     
   queryMysql('select id, humidity, date_h as date, hour from humidity  ORDER BY date_h DESC')
   .then( data => {
