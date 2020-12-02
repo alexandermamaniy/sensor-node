@@ -92,17 +92,6 @@ insert into temperature(temp, date_h, hour) values (24,'2020-12-01', '10:12:23')
 -- 	 $X{BETWEEN, sales.created_at,  date_report_init,  date_report_end }
 
 
-
-select h.date_h,  avg(t.temp) as promedio_temp, avg(h.humidity) as promedio_humedad, max(h.humidity) as max_humedad, min(h.humidity) as min_humedad, max(t.temp) as max_temperatura, min(t.temp) as min_temperatura from humidity as h
-inner join temperature as t on h.date_h = t.date_h
-where h.date_h BETWEEN 
-     
-     DATE_SUB(NOW(),INTERVAL 24*7 HOUR)
-     and NOW()
-GROUP BY h.date_h
-
-
-
 select ROW_NUMBER ( ) OVER (ORDER BY h.date_h) as nro,   SUBSTRING_INDEX(  SUBSTRING_INDEX( h.date_h, " ", 1) , "-", -2 ) as fecha,  SUBSTRING_INDEX( h.date_h, " ", 1)  as fecha_format , h.date_h ,  avg(h.humidity) as promedio_humedad,  max(t.temp) as max_temperatura, min(t.temp) as min_temperatura from humidity as h
 inner join temperature as t on h.date_h = t.date_h
 where  
@@ -110,3 +99,7 @@ h.date_h BETWEEN
      DATE_SUB(NOW(),INTERVAL 8 DAY)
      and NOW()
 GROUP BY  h.date_h
+
+
+
+set @numero=0; select @numero:=@numero+1 as nro, SUBSTRING_INDEX(  SUBSTRING_INDEX( h.date_h, " ", 1) , "-", -2 ) as fecha,  SUBSTRING_INDEX( h.date_h, " ", 1)  as fecha_format , h.date_h ,  avg(h.humidity) as promedio_humedad,  max(t.temp) as max_temperatura, min(t.temp) as min_temperatura from humidity as h inner join temperature as t on h.date_h = t.date_h where   h.date_h BETWEEN       DATE_SUB(NOW(),INTERVAL 8 DAY)      and NOW() GROUP BY  h.date_h

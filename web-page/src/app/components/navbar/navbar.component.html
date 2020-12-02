@@ -14,7 +14,9 @@
 			<li *ngIf="(isAuthenticated && user.role=='ADMIN_ROLE')" class="nav-item"><a [routerLink]="['/users']" class="nav-link">Usuarios</a></li>
 			<li *ngIf="(isAuthenticated && user.role=='ADMIN_ROLE')" class="nav-item"><a [routerLink]="['/temp']" class="nav-link" >Temperatura</a></li>
 			<li *ngIf="(isAuthenticated && user.role=='ADMIN_ROLE')" class="nav-item"><a [routerLink]="['/hum']" class="nav-link" >Humedad</a></li>
+			<li *ngIf="(isAuthenticated && user.role=='ADMIN_ROLE')" class="nav-item"><a href="{{urlReports}}" target="_blank" class="nav-link">reporte</a></li>
 			<li *ngIf="isAuthenticated" class="nav-item"><a href="{{urlPageNodeRed}}" target="_blank" class="nav-link">Node Red</a></li>
+
 		</ul>
 
 		<ul *ngIf="!isAuthenticated" class="nav navbar-nav navbar-right ml-auto">			

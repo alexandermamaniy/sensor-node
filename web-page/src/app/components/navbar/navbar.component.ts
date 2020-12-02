@@ -13,11 +13,13 @@ export class NavbarComponent implements OnInit {
   user: any;
   isAuthenticated: boolean;
   urlPageNodeRed:  string;
+  urlReports: string;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router) { 
       this.urlPageNodeRed = environment.urlPageNodeRed;
+      this.urlReports = `${environment.serverUrl}/report`;      
     }
 
   ngOnInit() {
