@@ -58,7 +58,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<nav class=\"navbar navbar-default navbar-expand-lg navbar-light\">\n\t<div class=\"navbar-header d-flex col\">\n\t\t<a class=\"navbar-brand\" href=\"#\">Sensor<b>Node</b></a>  \t\t\n\t\t<button type=\"button\" data-target=\"#navbarCollapse\" data-toggle=\"collapse\" class=\"navbar-toggle navbar-toggler ml-auto\">\n\t\t\t<span class=\"navbar-toggler-icon\"></span>\n\t\t\t<span class=\"icon-bar\"></span>\n\t\t\t<span class=\"icon-bar\"></span>\n\t\t\t<span class=\"icon-bar\"></span>\n\t\t</button>\n\t</div>\n\t<!-- Collection of nav links, forms, and other content for toggling -->\n\t<div id=\"navbarCollapse\" class=\"collapse navbar-collapse justify-content-start\">\n\t\t<ul class=\"nav navbar-nav\">\n\t\t\t<li *ngIf=\"(isAuthenticated && user.role=='ADMIN_ROLE')\" class=\"nav-item\"><a [routerLink]=\"['/users']\" class=\"nav-link\">Usuarios</a></li>\n\t\t\t<li *ngIf=\"(isAuthenticated && user.role=='ADMIN_ROLE')\" class=\"nav-item\"><a [routerLink]=\"['/temp']\" class=\"nav-link\" >Temperatura</a></li>\n\t\t\t<li *ngIf=\"(isAuthenticated && user.role=='ADMIN_ROLE')\" class=\"nav-item\"><a [routerLink]=\"['/hum']\" class=\"nav-link\" >Humedad</a></li>\n\t\t\t<li *ngIf=\"isAuthenticated\" class=\"nav-item\"><a href=\"{{urlPageNodeRed}}\" target=\"_blank\" class=\"nav-link\">Node Red</a></li>\n\t\t</ul>\n\n\t\t<ul *ngIf=\"!isAuthenticated\" class=\"nav navbar-nav navbar-right ml-auto\">\t\t\t\n\t\t\t<li class=\"nav-item\">\n\t\t\t\t<a href=\"#myModal\" data-toggle=\"modal\" class=\"trigger-btn btn btn-primary get-started-btn mt-1 mb-1\">Login</a>\t\n\t\t\t</li>\n\t\t</ul>\n\n\t\t<ul *ngIf=\"isAuthenticated\" class=\"nav navbar-nav navbar-right ml-auto\">\t\t\t\n\t\t\t<li class=\"nav-item\">\n\t\t\t\t<a (click)=\"logout()\" class=\"trigger-btn btn btn-primary get-started-btn mt-1 mb-1\">Logout</a>\t\n\t\t\t</li>\n\t\t</ul>\n\t</div>\n\n\t<app-login (isLogin)=\"login($event)\" ></app-login> \n</nav>");
+/* harmony default export */ __webpack_exports__["default"] = ("<nav class=\"navbar navbar-default navbar-expand-lg navbar-light\">\n\t<div class=\"navbar-header d-flex col\">\n\t\t<a class=\"navbar-brand\" href=\"#\">Sensor<b>Node</b></a>  \t\t\n\t\t<button type=\"button\" data-target=\"#navbarCollapse\" data-toggle=\"collapse\" class=\"navbar-toggle navbar-toggler ml-auto\">\n\t\t\t<span class=\"navbar-toggler-icon\"></span>\n\t\t\t<span class=\"icon-bar\"></span>\n\t\t\t<span class=\"icon-bar\"></span>\n\t\t\t<span class=\"icon-bar\"></span>\n\t\t</button>\n\t</div>\n\t<!-- Collection of nav links, forms, and other content for toggling -->\n\t<div id=\"navbarCollapse\" class=\"collapse navbar-collapse justify-content-start\">\n\t\t<ul class=\"nav navbar-nav\">\n\t\t\t<li *ngIf=\"(isAuthenticated && user.role=='ADMIN_ROLE')\" class=\"nav-item\"><a [routerLink]=\"['/users']\" class=\"nav-link\">Usuarios</a></li>\n\t\t\t<li *ngIf=\"(isAuthenticated && user.role=='ADMIN_ROLE')\" class=\"nav-item\"><a [routerLink]=\"['/temp']\" class=\"nav-link\" >Temperatura</a></li>\n\t\t\t<li *ngIf=\"(isAuthenticated && user.role=='ADMIN_ROLE')\" class=\"nav-item\"><a [routerLink]=\"['/hum']\" class=\"nav-link\" >Humedad</a></li>\n\t\t\t<li *ngIf=\"(isAuthenticated && user.role=='ADMIN_ROLE')\" class=\"nav-item\"><a href=\"{{urlReports}}\" target=\"_blank\" class=\"nav-link\">reporte</a></li>\n\t\t\t<li *ngIf=\"isAuthenticated\" class=\"nav-item\"><a href=\"{{urlPageNodeRed}}\" target=\"_blank\" class=\"nav-link\">Node Red</a></li>\n\n\t\t</ul>\n\n\t\t<ul *ngIf=\"!isAuthenticated\" class=\"nav navbar-nav navbar-right ml-auto\">\t\t\t\n\t\t\t<li class=\"nav-item\">\n\t\t\t\t<a href=\"#myModal\" data-toggle=\"modal\" class=\"trigger-btn btn btn-primary get-started-btn mt-1 mb-1\">Login</a>\t\n\t\t\t</li>\n\t\t</ul>\n\n\t\t<ul *ngIf=\"isAuthenticated\" class=\"nav navbar-nav navbar-right ml-auto\">\t\t\t\n\t\t\t<li class=\"nav-item\">\n\t\t\t\t<a (click)=\"logout()\" class=\"trigger-btn btn btn-primary get-started-btn mt-1 mb-1\">Logout</a>\t\n\t\t\t</li>\n\t\t</ul>\n\t</div>\n\n\t<app-login (isLogin)=\"login($event)\" ></app-login> \n</nav>");
 
 /***/ }),
 
@@ -647,6 +647,7 @@ let NavbarComponent = class NavbarComponent {
         this.route = route;
         this.router = router;
         this.urlPageNodeRed = src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].urlPageNodeRed;
+        this.urlReports = `${src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].serverUrl}/report`;
     }
     ngOnInit() {
         if (localStorage.getItem('Authorization')) {
@@ -803,8 +804,10 @@ let TemperatureComponent = class TemperatureComponent {
             this.user = JSON.parse(atob(localStorage.getItem('Authorization').split('.')[1])).user;
             this.temperatureService.getAll()
                 .subscribe(resp => {
+                console.log('regreps' + resp['temps']);
                 this.temps = resp['temps'];
             }, err => {
+                console.log(err);
             });
         }
         else {
@@ -883,8 +886,10 @@ let CreateUserComponent = class CreateUserComponent {
     }
     createUser(userData) {
         const ci = /^\d{5,7}[\ ]+[A-Za-z]+$/gm;
-        const regexAlfabeto = /^[a-zA-Z\ ]+$/gm;
-        const regexAlfabeNumericoEspacios = /^[\w\ ]+$/gm;
+        const regexAlfabetoNom = /^[a-zA-Z\ ]+$/gm;
+        const regexAlfabetoPat = /^[a-zA-Z\ ]+$/gm;
+        const regexAlfabetoMat = /^[a-zA-Z\ ]+$/gm;
+        const regexAlfabeNumericoEspacios = /^[0-9A-Za-z\ \,\#\.]+$/gm;
         const celular = /^\d{5,8}$/gm;
         const correo = /^((?!\.)[\w-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/gm;
         const username = /^[A-Za-z0-9]+$/gm;
@@ -898,67 +903,89 @@ let CreateUserComponent = class CreateUserComponent {
         let cellphoneBad = document.getElementById("cellphoneBad");
         let usernameBad = document.getElementById("usernameBad");
         let passwordBad = document.getElementById("passwordBad");
+        let isValidci = false;
+        let isValidname = false;
+        let isValidlastname = false;
+        let isValidsurname = false;
+        let isValidemail = false;
+        let isValidaddress = false;
+        let isValidcellphone = false;
+        let isValidusername = false;
+        let isValidpassword = false;
         if (ci.test(userData.ci)) {
             ciBad.style.display = "none";
+            isValidci = true;
         }
         else {
             ciBad.style.display = "block";
         }
-        if (regexAlfabeto.test(userData.name)) {
+        if (regexAlfabetoNom.test(userData.name)) {
             nameBad.style.display = "none";
+            isValidname = true;
         }
         else {
             nameBad.style.display = "block";
         }
-        if (regexAlfabeto.test(userData.lastname)) {
+        if (regexAlfabetoPat.test(userData.lastname)) {
             lastnameBad.style.display = "none";
+            isValidlastname = true;
         }
         else {
             lastnameBad.style.display = "block";
         }
-        if (regexAlfabeto.test(userData.surname)) {
+        if (regexAlfabetoMat.test(userData.surname)) {
             surnameBad.style.display = "none";
+            isValidsurname = true;
         }
         else {
             surnameBad.style.display = "block";
         }
         if (correo.test(userData.email)) {
             emailBad.style.display = "none";
+            isValidemail = true;
         }
         else {
             emailBad.style.display = "block";
         }
         if (regexAlfabeNumericoEspacios.test(userData.address)) {
             addressBad.style.display = "none";
+            isValidaddress = true;
         }
         else {
             addressBad.style.display = "block";
         }
         if (celular.test(userData.cellphone)) {
             cellphoneBad.style.display = "none";
+            isValidcellphone = true;
         }
         else {
             cellphoneBad.style.display = "block";
         }
         if (username.test(userData.username)) {
             usernameBad.style.display = "none";
+            isValidusername = true;
         }
         else {
             usernameBad.style.display = "block";
         }
         if (password.test(userData.password)) {
             passwordBad.style.display = "none";
+            isValidpassword = true;
         }
         else {
             passwordBad.style.display = "block";
         }
-        this.userService.create(userData)
-            .subscribe(resp => {
-            $('#addEmployeeModal').modal('hide');
-            this.router.navigateByUrl('/sample', { skipLocationChange: true }).then(() => this.router.navigate(["/users"]));
-        }, err => {
-            console.log(err);
-        });
+        let isValid = isValidci && isValidname && isValidlastname && isValidsurname && isValidemail && isValidaddress && isValidcellphone && isValidusername && isValidpassword;
+        if (isValid) {
+            this.userService.create(userData)
+                .subscribe(resp => {
+                console.log(resp);
+                $('#addEmployeeModal').modal('hide');
+                this.router.navigateByUrl('/sample', { skipLocationChange: true }).then(() => this.router.navigate(["/users"]));
+            }, err => {
+                console.log(err);
+            });
+        }
     }
 };
 CreateUserComponent.ctorParameters = () => [
@@ -1480,8 +1507,8 @@ __webpack_require__.r(__webpack_exports__);
 
 const environment = {
     production: false,
-    serverUrl: "http://localhost:3000",
-    urlPageNodeRed: "http://localhost:1880/ui/#/0",
+    serverUrl: "http://192.168.1.7:3000",
+    urlPageNodeRed: "http://192.168.1.7:1880/ui/#/0",
     SEED: 'este-es-el-seed-desarrollo'
 };
 /*
