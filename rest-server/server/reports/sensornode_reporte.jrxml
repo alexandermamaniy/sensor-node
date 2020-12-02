@@ -3,12 +3,6 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ventas" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="328bba95-8ed7-430c-8179-75815a82fd04">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="mysql sensor"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
-	<parameter name="date_report_init" class="java.util.Date">
-		<defaultValueExpression><![CDATA[DATERANGE("2020-08-29")]]></defaultValueExpression>
-	</parameter>
-	<parameter name="date_report_end" class="java.util.Date">
-		<defaultValueExpression><![CDATA[DATERANGE("2020-08-29")]]></defaultValueExpression>
-	</parameter>
 	<parameter name="path_image_logo" class="java.lang.String">
 		<parameterDescription><![CDATA[Ruta absoluta del logo del reporte]]></parameterDescription>
 		<defaultValueExpression><![CDATA["/home/alex/JaspersoftWorkspace/pruena/ventas/logo.png"]]></defaultValueExpression>
@@ -17,7 +11,9 @@
 		<![CDATA[select ROW_NUMBER ( ) OVER (ORDER BY h.date_h) as nro,   SUBSTRING_INDEX(  SUBSTRING_INDEX( h.date_h, " ", 1) , "-", -2 ) as fecha,  SUBSTRING_INDEX( h.date_h, " ", 1)  as fecha_format , h.date_h ,  avg(h.humidity) as promedio_humedad,  max(t.temp) as max_temperatura, min(t.temp) as min_temperatura from humidity as h
 inner join temperature as t on h.date_h = t.date_h
 where  
-$X{BETWEEN, h.date_h ,  date_report_init,  date_report_end } 
+h.date_h BETWEEN 
+     DATE_SUB(NOW(),INTERVAL 8 DAY)
+     and NOW()
 GROUP BY  h.date_h]]>
 	</queryString>
 	<field name="nro" class="java.math.BigInteger">

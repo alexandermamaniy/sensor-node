@@ -12,10 +12,28 @@ jasper = require('node-jasper')({
   path:'lib/jasperreports-6.2.0',
   reports: {
     hw: {
-      jasper: 'reports/sensornode_reporte.jasper'}
-    }});
-    //19-09-20 08:14:17 AM
-
+      jasper: 'reports/sensornode_reporte.jasper'
+    }
+  },
+  drivers: {
+    mysql: {
+        path: 'lib/jasperreports-6.2.0/lib/mysql-connector-java-5.1.49-bin.jar',
+        class: 'com.mysql.jdbc.Driver',
+        type: 'mysql'
+    }
+  },
+  conns: {
+    dbserver1: {
+        host: 'localhost',
+        port: 3306,
+        dbname: 'sensornode',
+        user: 'root',
+        pass: 'example',
+        driver: 'mysql'
+    }
+  },
+  defaultConn: 'dbserver1'
+});
 app.get('/report', function(req, res) {
   console.log(__dirname)
   let report = {
