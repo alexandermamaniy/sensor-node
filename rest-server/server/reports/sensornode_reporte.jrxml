@@ -8,7 +8,7 @@
 		<defaultValueExpression><![CDATA["/home/alex/JaspersoftWorkspace/pruena/ventas/logo.png"]]></defaultValueExpression>
 	</parameter>
 	<queryString>
-		<![CDATA[select  SUBSTRING_INDEX(  SUBSTRING_INDEX( h.date_h, " ", 1) , "-", -2 ) as fecha,  SUBSTRING_INDEX( h.date_h, " ", 1)  as fecha_format , h.date_h ,  avg(h.humidity) as promedio_humedad,  max(t.temp) as max_temperatura, min(t.temp) as min_temperatura from humidity as h inner join temperature as t on h.date_h = t.date_h where   h.date_h BETWEEN       DATE_SUB(NOW(),INTERVAL 8 DAY)      and NOW() GROUP BY  h.date_h]]>
+		<![CDATA[select  SUBSTRING_INDEX(  SUBSTRING_INDEX( h.date_h, " ", 1) , "-", -2 ) as fecha,  SUBSTRING_INDEX( h.date_h, " ", 1)  as fecha_format , h.date_h ,  avg(h.humidity) as promedio_humedad,  max(t.temp) as max_temperatura, min(t.temp) as min_temperatura from humidity as h inner join temperature as t on h.date_h = t.date_h where   h.date_h BETWEEN       DATE_SUB(NOW(),INTERVAL 7 DAY)      and NOW() GROUP BY  h.date_h]]>
 	</queryString>
 	<field name="fecha" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="fecha"/>
