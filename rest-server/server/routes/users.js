@@ -27,7 +27,7 @@ app.get('/user', [verificaToken, verificaAdminRole], (req, res) => {
     })
   })
   .catch(error => {
-    return res.status.json({
+    return res.status(400).json({
       ok: false,
       err: error
     })
@@ -64,7 +64,7 @@ app.get('/user/:id', [verificaToken, verificaAdminRole], (req, res) => {
     })
   })
   .catch(error => {
-    return res.status.json({
+    return res.status(404).json({
       ok: false,
       err: error
     })
@@ -102,14 +102,14 @@ app.delete('/user/:id', [verificaToken, verificaAdminRole], (req, res) => {
       })
     })
     .catch(error => {
-      return res.status.json({
+      return res.status(500).json({
         ok: false,
         err: error
       })
     }) 
   })
   .catch(err => {
-    return res.status.json({
+    return res.status(400).json({
       ok: false,
       err: 'No existe el usuario'
     })
@@ -156,7 +156,8 @@ app.post('/user', [verificaToken, verificaAdminRole],(req, res) => {
     })
   })
   .catch(error => {
-    return res.status.json({
+    console.log(error);
+    return res.status(400).json({
       ok: false,
       err: error
     })
@@ -215,7 +216,7 @@ app.put('/user/:id', [verificaToken, verificaAdminRole], (req, res) => {
     })
   })
   .catch(error => {
-    return res.status.json({
+    return res.status(400).json({
       ok: false,
       err: error
     })

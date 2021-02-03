@@ -106,7 +106,7 @@
 <div id="editEmployeeModal" class="modal fade">
   <div class="modal-dialog">
       <div class="modal-content">
-          <form [formGroup]="userForm" (ngSubmit)="updateUserButton(userForm.value)" >
+          <form [formGroup]="userForm2" id="userForm2" (ngSubmit)="updateUserButton(userForm2.value)" >
               <div class="modal-header">
                   <h4 class="modal-title">Editar Usuario</h4>
                   <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -116,21 +116,25 @@
                   <div class="form-group">
                       <label>C.I.</label>
                       <input type="text" class="form-control" formControlName="ci" id="ci"  required>
+                      <p id="ciBad" style="color:red; display:none" >Campo CI debe ser unico y de 5 a 7 digitos y extension: "123456 Cbba"</p>
                   </div>
 
                   <div class="form-group">
                       <label>Nombre</label>
                       <input type="text" class="form-control" formControlName="name" id="name"  required>
-                  </div>
+                      <p id="nameBad" style="color:red; display:none" >Campo nombre solo caracteres alfabeticos</p>
+                    </div>
 
                   <div class="form-group">
                       <label>Apellido Paterno</label>
                       <input type="text" class="form-control" formControlName="lastname" id="lastname"  required>
-                  </div>
+                      <p id="lastnameBad" style="color:red; display:none" >Campo apellido Paterno solo caracteres alfabeticos</p>
+                    </div>
 
                   <div class="form-group">
                       <label>Apellido Materno</label>
                       <input type="text" class="form-control" formControlName="surname" id="surname"  required>
+                      <p id="surnameBad" style="color:red; display:none" >Campo apellido Materno solo caracteres alfabeticos</p>
                   </div>
 
 
@@ -138,24 +142,29 @@
                   <div class="form-group">
                       <label>correo</label>
                       <input type="email" class="form-control" formControlName="email" id="email"  required>
+                      <p id="emailBad" style="color:red; display:none" >Campo correo invalido  ejem: user@dominio.com</p>
                   </div>
                   <div class="form-group">
                       <label>direccion</label>
                       <textarea class="form-control" formControlName="address" id="address"  required></textarea>
+                      <p id="addressBad" style="color:red; display:none" >Campo Direccion solo caracteres alfanumericos</p>
                   </div>
                   <div class="form-group">
                       <label>telefono</label>
                       <input type="tel" class="form-control" formControlName="cellphone" id="cellphone"  required>
+                      <p id="cellphoneBad" style="color:red; display:none" >Campo Telefono solo caracteres numericos de 5 a 8 digitos</p>
                   </div>
 
                   <div class="form-group">
                       <label>Nombre De Usuario</label>
                       <input type="text" class="form-control" formControlName="username" id="username"  required>
+                      <p id="usernameBad" style="color:red; display:none" >Campo Nombre de usuario solo caracteres alfanumericos</p>
                   </div>
 
                   <div class="form-group">
                       <label>Contraseña</label>
                       <input type="password" class="form-control" formControlName="password" id="password"  required>
+                      <p id="passwordBad" style="color:red; display:none" >Campo Contraseña tiene que tener por lo menos 7 caracteres</p>
                   </div>
 
               </div>

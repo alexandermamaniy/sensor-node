@@ -18,7 +18,7 @@ export class ListUsersComponent implements OnInit {
   userIdDelete: any;
   userIdUpdate: any;
 
-  userForm: FormGroup;
+  userForm2: FormGroup;
 
   constructor( 
     private userService: UserService,
@@ -26,7 +26,7 @@ export class ListUsersComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router) {
 
-      this.userForm = this.formBuilder.group({
+      this.userForm2 = this.formBuilder.group({
         ci: '',
         name: '',
         lastname: '',
@@ -62,7 +62,7 @@ export class ListUsersComponent implements OnInit {
 
     let userEncontrado = this.users.filter(user => user.id==id)[0];
     console.log(userEncontrado)
-    this.userForm = this.formBuilder.group({
+    this.userForm2 = this.formBuilder.group({
       ci: userEncontrado.ci,
       name: userEncontrado.name,
       lastname: userEncontrado.lastname,
@@ -77,14 +77,123 @@ export class ListUsersComponent implements OnInit {
   }
 
   updateUserButton(userData){
-    this.userService.update(this.userIdUpdate, userData)
+    const ci = /^\d{5,7}[\ ]+[A-Za-z]+$/gm;
+    const regexAlfabetoNom = /^[a-zA-Z\ ]+$/gm;
+    const regexAlfabetoPat = /^[a-zA-Z\ ]+$/gm;
+    const regexAlfabetoMat = /^[a-zA-Z\ ]+$/gm;
+    const regexAlfabeNumericoEspacios = /^[0-9A-Za-z\ \,\#\.]+$/gm;
+    const celular = /^\d{5,8}$/gm;
+    const correo = /^((?!\.)[\w-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/gm;
+    const username = /^[A-Za-z0-9]+$/gm;
+    const password = /^.{7,}$/gm;
+    
+    let baseRoot = document.getElementById('userForm2');
+    
+    let ciBad = baseRoot.querySelector("#ciBad");
+    let nameBad = baseRoot.querySelector("#nameBad");
+    let lastnameBad = baseRoot.querySelector("#lastnameBad");
+    let surnameBad = baseRoot.querySelector("#surnameBad");
+    let emailBad = baseRoot.querySelector("#emailBad");
+    let addressBad = baseRoot.querySelector("#addressBad");
+    let cellphoneBad = baseRoot.querySelector("#cellphoneBad");
+    let usernameBad = baseRoot.querySelector("#usernameBad");
+    let passwordBad = baseRoot.querySelector("#passwordBad");
+    
+    let isValidci=false;
+    let isValidname=false;
+    let isValidlastname=false;
+    let isValidsurname=false;
+    let isValidemail=false;
+    let isValidaddress=false;
+    let isValidcellphone=false;
+    let isValidusername=false;
+    let isValidpassword=false;
+
+    if(ci.test(userData.ci)){
+      ciBad.innerHTML = "Campo CI debe ser unico y de 5 a 7 digitos y extension: \"123456 Cbba\"";
+      ciBad['style'].display = "none";
+      isValidci=true;
+    } else {
+      ciBad['style'].display = "block";
+    }
+
+
+    if(regexAlfabetoNom.test(userData.name)){
+      nameBad['style'].display = "none";
+      isValidname=true;
+    } else {
+      nameBad['style'].display = "block";
+    }
+
+    if(regexAlfabetoPat.test(userData.lastname)){
+      lastnameBad['style'].display = "none";
+      isValidlastname=true;
+    } else {
+      lastnameBad['style'].display = "block";
+    }
+
+    if(regexAlfabetoMat.test(userData.surname)){
+      surnameBad['style'].display = "none";
+      isValidsurname=true;
+    } else {
+      surnameBad['style'].display = "block";
+    }
+
+    if(correo.test(userData.email)){
+      emailBad['style'].display = "none";
+      isValidemail=true;
+    } else {
+      emailBad['style'].display = "block";
+    }
+
+    if(regexAlfabeNumericoEspacios.test(userData.address)){
+      addressBad['style'].display = "none";
+      isValidaddress=true;
+    } else {
+      addressBad['style'].display = "block";
+    }
+
+    if(celular.test(userData.cellphone)){
+      cellphoneBad['style'].display = "none";
+      isValidcellphone=true;
+    } else {
+      cellphoneBad['style'].display = "block";
+    }
+
+    if(username.test(userData.username)){
+      usernameBad['style'].display = "none";
+      isValidusername=true;
+    } else {
+      usernameBad['style'].display = "block";
+    }
+
+    if(password.test(userData.password)){
+      passwordBad['style'].display = "none";
+      isValidpassword=true;
+    } else {
+      passwordBad['style'].display = "block";
+    }
+
+    let isValid = isValidci && isValidname && isValidlastname && isValidsurname && isValidemail && isValidaddress && isValidcellphone && isValidusername && isValidpassword;
+    
+    if(isValid){
+
+      this.userService.update(this.userIdUpdate, userData)
       .subscribe(resp => {
         $('#editEmployeeModal').modal('hide');
         this.router.navigateByUrl('/sample', { skipLocationChange: true }).then(() =>
           this.router.navigate(["/users"]));
       }, err => {
-        console.log(err);
+        if (err.error.err.code == 'ER_DUP_ENTRY') {
+          isValidci = false;
+          ciBad.innerHTML = "El CI: " + userData.ci + " ya existe.";
+          ciBad['style'].display = "block";
+        }
+        console.log("este es el error2: ",err.error);
+        console.log("este es el error: ",err.error.err.code);
       });
+    }
+
   }
 
   deleteUser(id) {

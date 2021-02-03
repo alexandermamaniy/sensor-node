@@ -68,6 +68,7 @@ export class CreateUserComponent implements OnInit {
     let isValidpassword=false;
 
     if(ci.test(userData.ci)){
+      ciBad.innerHTML = "Campo CI debe ser unico y de 5 a 7 digitos y extension: \"123456 Cbba\"";
       ciBad.style.display = "none";
       isValidci=true;
     } else {
@@ -136,12 +137,18 @@ export class CreateUserComponent implements OnInit {
     if(isValid){
       this.userService.create(userData)
       .subscribe(resp => {
-        console.log(resp)
+        // console.log(resp)
         $('#addEmployeeModal').modal('hide');
         this.router.navigateByUrl('/sample', { skipLocationChange: true }).then(() =>
           this.router.navigate(["/users"]));
       }, err => {
-        console.log(err);
+        if (err.error.err.code == 'ER_DUP_ENTRY') {
+          isValidci = false;
+          ciBad.innerHTML = "El CI: " + userData.ci + " ya existe.";
+          ciBad.style.display = "block";
+        }
+        console.log("este es el error2: ",err.error);
+        console.log("este es el error: ",err.error.err.code);
       });
     }
 

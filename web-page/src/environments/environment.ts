@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   serverUrl: "http://192.168.11.177:3000",
+  // serverUrl: "http://127.0.0.1:3000",
   urlPageNodeRed: "http://192.168.11.177:1880/ui/#/0",
   SEED: 'este-es-el-seed-desarrollo'
 };
