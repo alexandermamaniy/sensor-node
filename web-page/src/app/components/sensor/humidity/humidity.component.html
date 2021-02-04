@@ -18,7 +18,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let humidityD of humidities  | angularPaginator: { currentPage: currentPage, itemsPerPage: 5 } ; let i = index"  >
+          <tr *ngFor="let humidityD of humidities  | angularPaginator: { currentPage: currentPage, itemsPerPage: 15 } ; let i = index"  >
             <td>{{i+1}}</td>
             <td>{{humidityD.humidity}}</td>
             <td>{{humidityD.date.split('T')[0]+"  "+humidityD.hour}}</td>
