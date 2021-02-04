@@ -186,7 +186,7 @@ export class ListUsersComponent implements OnInit {
       }, err => {
         if (err.error.err.code == 'ER_DUP_ENTRY') {
           isValidci = false;
-          ciBad.innerHTML = "El CI: " + userData.ci + " ya existe.";
+          ciBad.innerHTML = "El ci " + userData.ci + " ya se encuetra registrado.";
           ciBad['style'].display = "block";
         }
         console.log("este es el error2: ",err.error);
